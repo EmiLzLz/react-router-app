@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,6 +13,8 @@ import { Icon } from "@iconify/react";
 import Loader from "./Loader";
 
 function ElectronicsProducts() {
+  const [addItem, setAddItem] = useState([]);
+
   let url = "https://fakestoreapi.com/products/category/electronics";
 
   let { data } = useFetch(url);
@@ -20,6 +22,21 @@ function ElectronicsProducts() {
   if(!data){
     return <Loader />
   }
+
+  const handleAdd = (product) => {
+    const item = {
+      title: product.title,
+      image: product.image,
+      price: product.price,
+
+    }
+
+    setAddItem((prevItems) => [...prevItems, item])
+
+    console.log(addItem);
+  }
+
+  
 
   return (
     <div className="slider-container w-full pb-8">
@@ -54,7 +71,7 @@ function ElectronicsProducts() {
                 </p>
               </div>
               <div className="actions pb-2 pt-2 px-1 w-full flex flex-col md:flex-row justify-center items-center gap-4">
-                <button className="add-btn text-white rounded-md bg-[#93032E] p-2 w-full md:w-auto flex items-center justify-center gap-1">
+                <button onClick={()=>handleAdd(product)} className="add-btn text-white rounded-md bg-[#93032E] p-2 w-full md:w-auto flex items-center justify-center gap-1">
                   <Icon
                     icon="fluent-emoji-high-contrast:shopping-cart"
                     style={{ fontSize: "28px" }}

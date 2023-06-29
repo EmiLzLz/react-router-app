@@ -13,11 +13,11 @@ function App() {
     <div className="App">
       <Header />
       <HashRouter>
-        {/* <nav className="h-auto">
+        <nav className="h-auto">
           <Link to={"/"}>Home</Link>
           <Link to={"/all"}>Contact</Link>
           <Link to={"/search"}>About</Link>
-        </nav> */}
+        </nav>
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/all" element={<AllProducts />} />
